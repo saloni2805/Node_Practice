@@ -6,11 +6,10 @@
     <title>Document</title>
     <%-include('navbar.ejs')%>
   </head>
-
   <body>
-    <h1>Contact Us</h1>
-    <hr />
-    <form action="/saveform" method="GET" enctype="multipart/form-data">
+    <h1>Hey Home</h1>
+    <br />
+    <form action="/saveform" method="post">
       <label for="">First Name</label>
       <input
         type="text"
@@ -26,3 +25,9 @@
     </form>
   </body>
 </html>
+
+<!-- Middleware -->
+<!-- Middleware to fetch data through POST Method -->
+<!-- app.use(express.urlencoded({extended:true})) -->
+<!-- FOR FETCHING -->
+<!-- req.body -->
