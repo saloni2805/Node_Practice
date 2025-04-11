@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <%-include('navbar.ejs')%>
+  </head>
+
+  <body>
+    <h1 class="text-center my-2">Product Data</h1>
+    <div class="container mt-4">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Product Quantity</th>
+            <th scope="col">Product Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><%- data.product_name %></td>
+            <td><%- data.product_price%></td>
+            <td><%- data.product_quantity%></td>
+            <td><%- data.product_category%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
