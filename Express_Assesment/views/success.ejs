@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 class="text-center text-success my-4">Success</h1>
+    <h2 class="text-center">Application successful!</h2>
+
+    <div class="container my-4">
+      <div class="card">
+        <div class="card-header bg-primary text-white">Submitted Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Email:</strong> <%= data.email %>
+          </li>
+          <li class="list-group-item">
+            <strong>Mobile:</strong> <%= data.mobile %>
+          </li>
+          <li class="list-group-item">
+            <strong>Role:</strong> <%= data.role %>
+          </li>
+          <li class="list-group-item">
+            <strong>Vacancy:</strong> <%= data.vacancy %>
+          </li>
+          <li class="list-group-item">
+            <strong>Offer(CTC):</strong> <%= data.offer %>
+          </li>
+          <li class="list-group-item">
+            <strong>Skills:</strong> <%= data.skills %>
+          </li>
+          <li class="list-group-item">
+            <strong>Relevant Experience (Years) :</strong> <%= data.experience
+            %>
+          </li>
+          <li class="list-group-item">
+            <strong>Address:</strong> <%= data.address %>
+          </li>
+          <li class="list-group-item">
+            <strong>Availability for Interview :</strong> <%= data.address %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
