@@ -7,7 +7,7 @@ const HOST = "127.0.0.1"
 // static file serve
 app.use(express.static("public/"))
 
-var url = require("url")
+// var url = require("url")
 
 // body
 app.use(express.urlencoded({ extended: "true" }))
@@ -29,7 +29,7 @@ app.post("/saveform", (req, res) => {
   const { Name, Email } = req.body
 
   var sql = `insert into users(Name,Email) values('${Name}','${Email}')`
-  const result = connection.query(sql, (err, result) => {
+  connection.query(sql, (err, result) => {
     if (err) {
       console.log(err)
       console.log("Data Faild to insert")
@@ -38,7 +38,7 @@ app.post("/saveform", (req, res) => {
       console.log("Data Inserted Successfully...")
     }
   })
-
+  // navigattionn
   res.redirect("/udata")
 })
 

@@ -4,7 +4,6 @@ const connection = mysql.createConnection({
   host: "localhost",
   database: "user_db",
   password: "",
-  port: 3306,
 })
 
 // check connect or not
