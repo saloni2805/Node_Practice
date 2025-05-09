@@ -19,21 +19,40 @@
               <th>Sr No</th>
               <th>User Name</th>
               <th>User Email</th>
-              <th>Action</th>
+              <th colspan="2">Action</th>
             </tr>
           </thead>
           <tbody>
-            <% dat a.map((val, index) => { %>
+            <% data.map((val, index) => { %>
             <tr>
               <td><%= index + 1 %></td>
               <td><%- val.name %></td>
               <td><%- val.email %></td>
-              <td>
-                <i
-                  class="fa fa-trash text-danger fw-bold"
-                  style="cursor: pointer"
-                ></i>
+              <td onclick="return confirm('Are you sure?')">
+                <a href="/delete/<%- val.id%>">
+                  <i
+                    class="fa fa-trash text-danger fw-bold"
+                    style="cursor: pointer"
+                  ></i
+                ></a>
               </td>
+              <td>
+                <a href="/edit/<%- val.id%>">
+                  <i
+                    class="fa fa-edit text-primary fw-bold"
+                    style="cursor: pointer"
+                  ></i
+                ></a>
+              </td>
+
+              <!-- <td>
+                <a href="/delete?id=<%- val.id%>">
+                  <i
+                    class="fa fa-trash text-danger fw-bold"
+                    style="cursor: pointer"
+                  ></i
+                ></a>
+              </td> -->
             </tr>
             <% }) %>
           </tbody>

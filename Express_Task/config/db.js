@@ -8,6 +8,7 @@ const connection = mysql.createConnection({
 
 // check connect or not
 
+// Optional - we can directly export connection
 connection.connect((err) => {
   if (err) {
     console.log(err)
@@ -17,5 +18,11 @@ connection.connect((err) => {
     console.log("DB Connection Successfully ....")
   }
 })
+
+// if (connection) {
+//   console.log("Successfully connected DB")
+// } else {
+//   console.log("Connection failed !")
+// }
 
 module.exports = connection

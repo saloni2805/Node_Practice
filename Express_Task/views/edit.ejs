@@ -19,19 +19,33 @@
       </div>
 
       <form
-        action="/saveform"
+        action="/updateform"
         method="POST"
         class="mx-auto"
         style="max-width: 500px"
       >
+        <input type="hidden" name="id" readonly value="<%- data.id%>" />
+        <br />
         <div class="mb-3">
           <label for="name" class="form-label fw-bold">Enter User Name</label>
-          <input type="text" name="name" id="name" class="form-control" />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value="<%- data.name %>"
+            class="form-control"
+          />
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label fw-bold">Enter Email</label>
-          <input type="text" name="email" id="email" class="form-control" />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            value="<%- data.email%>"
+            class="form-control"
+          />
         </div>
 
         <div class="text-center">
