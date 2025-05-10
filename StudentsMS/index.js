@@ -90,8 +90,8 @@ app.post("/updateform", async (req, res) => {
      set 
      name='${name}',
      email='${email}',
-     course='${course}',
-    `
+     course='${course}'
+     where id='${id}'`
 
     await connection.execute(sql)
 

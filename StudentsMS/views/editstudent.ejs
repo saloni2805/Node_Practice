@@ -13,11 +13,11 @@
       <h1 class="mb-4 text-center">Edit Student Data</h1>
       <hr />
       <form
-        action="/saveform"
+        action="/updateform"
         method="POST"
         class="p-4 bg-white rounded w-50 mx-auto"
       >
-        <input type="hidden" name="pid" value="<%-data.pid%>" id="" />
+        <input type="hidden" name="id" value="<%-data.id%>" id="" />
 
         <div class="mb-3">
           <label for="name" class="form-label">Edit Name</label>
