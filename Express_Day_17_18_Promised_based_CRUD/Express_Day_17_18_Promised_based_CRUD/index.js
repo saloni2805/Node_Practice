@@ -1,180 +1,136 @@
-var express = require('express')
+var express = require("express")
 const app = express()
 
-const PORT = 5000 || process.env.PORT;
-const HOST = '127.0.0.1';
-
+const PORT = 3000 || process.env.PORT
+const HOST = "127.0.0.1"
 
 // middleware
-app.use(express.static('public/'))
+app.use(express.static("public/"))
 
-
-// req.body 
-app.use(express.urlencoded({ extended: true }));
-
+// req.body
+app.use(express.urlencoded({ extended: true }))
 
 //url
-var url = require('url');
-
+var url = require("url")
 
 // db connection
-var connection = require('./config/db')
+var connection = require("./config/db")
 
+app.get("/", (req, res) => {
+  // res.send("hello welcome to express server");
 
-
-app.get('/', (req, res) => {
-    // res.send("hello welcome to express server");
-
-    res.render('home.ejs');
+  res.render("home.ejs")
 })
 
 // form handling
-app.post('/saveform', async (req, res) => {
+app.post("/saveform", async (req, res) => {
+  try {
+    // res.send("<h1>Product added ...</h1>")
+    console.log(req.body)
 
-    try {
+    // var sql=`create table products(pid INT PRIMARY KEY AUTO_INCREMENT,
+    //  pname VARCHAR(255),pcatgory VARCHAR(100),pprice VARCHAR(50),pquantity int, pdetails TEXT)`;
 
-        // res.send("<h1>Product added ...</h1>")
-        console.log(req.body)
+    const { pname, pcategory, pprice, pquantity, pdetails } = req.body
 
-
-
-        // var sql=`create table products(pid INT PRIMARY KEY AUTO_INCREMENT,
-        //  pname VARCHAR(255),pcatgory VARCHAR(100),pprice VARCHAR(50),pquantity int, pdetails TEXT)`;
-
-
-        const { pname, pcategory, pprice, pquantity, pdetails } = req.body;
-
-
-        var sql = `insert into products
+    var sql = `insert into products
     (pname,pcatgory,pprice,pquantity,pdetails)
-     values('${pname}','${pcategory}','${pprice}','${pquantity}','${pdetails}')`;
+     values('${pname}','${pcategory}','${pprice}','${pquantity}','${pdetails}')`
 
+    //  connection.query replace
+    const result = await connection.execute(sql)
 
-        //  connection.query replace
-        const result = await connection.execute(sql);
+    console.log(result)
+    console.log("Data Inserted Successfully....")
 
-        console.log(result)
-        console.log("Data Inserted Successfully....")
-
-        res.redirect('/productdata')
-
-
-    } catch (err) {
-        console.log(err)
-        console.log("Faild to Insert Data....")
-        return;
-    }
+    res.redirect("/productdata")
+  } catch (err) {
+    console.log(err)
+    console.log("Faild to Insert Data....")
+    return
+  }
 })
-
 
 // product data
-app.get('/productdata', async (req, res) => {
+app.get("/productdata", async (req, res) => {
+  try {
+    var sql = `select * from products`
+    const [result] = await connection.execute(sql)
+    console.log(result)
 
+    const obj = { data: result }
+    res.render("productdata.ejs", obj)
 
-    try {
-
-        var sql = `select * from products`;
-        const [result] = await connection.execute(sql);
-        console.log(result)
-
-        const obj = { data: result }
-        res.render('productdata.ejs', obj);
-
-        console.log("Data Fetched Successfully..")
-
-
-    } catch (err) {
-        console.log(err);
-        console.log("Data faild to fetch..")
-        return;
-    }
+    console.log("Data Fetched Successfully..")
+  } catch (err) {
+    console.log(err)
+    console.log("Data faild to fetch..")
+    return
+  }
 })
-
-
 
 // delete
-app.get('/delete/:id', async (req, res) => {
+app.get("/delete/:id", async (req, res) => {
+  try {
+    var id = req.params.id
 
-    try {
+    var sql = `delete from products where pid='${id}'`
+    await connection.execute(sql)
+    // res.send("<h1>Deleted...</h1>" + id)
 
-        var id = req.params.id;
-
-        var sql = `delete from products where pid='${id}'`;
-        await connection.execute(sql);
-        // res.send("<h1>Deleted...</h1>" + id)
-
-
-        res.redirect('/productdata')
-
-
-    } catch (err) {
-        console.log(err)
-        console.log("Faild to Delete Products")
-    }
-
-
+    res.redirect("/productdata")
+  } catch (err) {
+    console.log(err)
+    console.log("Faild to Delete Products")
+  }
 })
 
+app.get("/edit/:id", async (req, res) => {
+  try {
+    var id = req.params.id
+    console.log(id)
 
-app.get('/edit/:id', async (req, res) => {
+    var sql = `select * from products where pid='${id}'`
 
-    try {
-        var id = req.params.id;
-        console.log(id);
+    //execute method return-  [rows,fileds]
+    const [result] = await connection.execute(sql)
+    console.log(result[0])
 
-        var sql = `select * from products where pid='${id}'`
+    const obj = { data: result[0] }
 
-        //execute method return-  [rows,fileds]
-        const [result] = await connection.execute(sql);
-        console.log(result[0])
-
-
-        const obj = { data: result[0] }
-
-        res.render('editproduct.ejs', obj)
-        // res.send("EDit Product" + id);
-
-
-    } catch (err) {
-        console.log(err)
-        console.log("Data faild to fetched ....Edit User")
-    }
+    res.render("editproduct.ejs", obj)
+    // res.send("EDit Product" + id);
+  } catch (err) {
+    console.log(err)
+    console.log("Data faild to fetched ....Edit User")
+  }
 })
 
+app.post("/updateform", async (req, res) => {
+  try {
+    const { pname, pcategory, pprice, pquantity, pdetails, pid } = req.body
+    console.log(req.body)
 
-app.post('/updateform', async (req, res) => {
-
-
-    try {
-
-        const { pname, pcategory, pprice, pquantity, pdetails, pid } = req.body;
-        console.log(req.body);
-
-        var sql = `update products
+    var sql = `update products
      set 
      pname='${pname}',
      pcatgory='${pcategory}',
      pprice='${pprice}',
      pquantity='${pquantity}',
      pdetails='${pdetails}'
-     where pid='${pid}'`;
+     where pid='${pid}'`
 
+    await connection.execute(sql)
 
-        await connection.execute(sql);
+    // res.send("Updated .....")
 
-        // res.send("Updated .....")
-
-        res.redirect('/productdata')
-
-    } catch (err) {
-        console.log(err)
-        console.log("Faild to update product data")
-    }
+    res.redirect("/productdata")
+  } catch (err) {
+    console.log(err)
+    console.log("Faild to update product data")
+  }
 })
-
-
 
 app.listen(PORT, HOST, () => {
-    console.log("Server is up...")
+  console.log("Server is up...")
 })
-

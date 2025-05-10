@@ -38,7 +38,6 @@ app.post("/saveform", (req, res) => {
       console.log("Data Inserted Successfully...")
     }
   })
-  // navigattion
   res.redirect("/udata")
 })
 
