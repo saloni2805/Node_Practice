@@ -16,14 +16,11 @@ app.get("/", (req, res) => {
   res.render("home.ejs")
 })
 
+// action handle
 app.post("/saveform", async (req, res) => {
   try {
     const { name, email, course } = req.body
-
-    var sql = `insert into students
-    (name,email,course)
-     values('${name}','${email}','${course}')`
-
+    var sql = `insert into students (name,email,course) values('${name}','${email}','${course}')`
     await connection.execute(sql)
     console.log("Data Inserted Successfully....")
     res.redirect("/studenstdata")
@@ -81,10 +78,10 @@ app.get("/edit/:id", async (req, res) => {
   }
 })
 
+// action handle
 app.post("/updateform", async (req, res) => {
   try {
     const { name, email, course, id } = req.body
-    console.log(req.body)
 
     var sql = `update students
      set 
