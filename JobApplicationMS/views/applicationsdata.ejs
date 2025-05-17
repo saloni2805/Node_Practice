@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applications</title>
+    <%-include('../views/cdn.ejs')%>
+  </head>
+  <body>
+    <h1 class="text-center my-4">Applications</h1>
+    <hr />
+    <div class="table-responsive mx-5 my-4">
+      <table class="table table-bordered align-middle text-center">
+        <thead class="table-primary">
+          <tr>
+            <th>SR No</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Resume</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.map((val, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%- val.id %></td>
+            <td><%- val.full_name %></td>
+            <td><%- val.email %></td>
+            <td><%- val.phone %></td>
+            <td><%- val.position %></td>
+            <td>
+              <% if (val.file) { %>
+              <a
+                href="/uploads/<%- val.file %>"
+                class="text-decoration-none"
+                download
+              >
+                <i class="bi bi-download"></i>
+                <span class="mx-1"><%- val.file %></span>
+              </a>
+
+              <% } else { %> N/A <% } %>
+            </td>
+            <td>
+              <a
+                href="/delete/<%- val.id %>"
+                onclick="return confirm('Are you sure?')"
+              >
+                <i
+                  class="bi bi-trash fw-bold"
+                  style="cursor: pointer; color: crimson"
+                ></i
+              ></a>
+            </td>
+
+            <td>
+              <a href="/edit/<%- val.id %>">
+                <i
+                  class="bi bi-pencil fw-bold"
+                  style="cursor: pointer; color: blue"
+                ></i
+              ></a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -9,6 +9,7 @@ const Data = () => {
   // GET data
   const fetchUsers = async () => {
     const res = await axios.get("http://localhost:5000/students")
+    console.log(res.data)
     setUsers(res.data)
   }
 

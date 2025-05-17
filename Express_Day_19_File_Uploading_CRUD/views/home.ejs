@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        input{
+
+            padding:7px 20px;
+            font-weight: bold;
+
+        }
+
+        button{
+            padding:10px 30px;
+            background-color: black;
+            border: none;
+            font-weight: bold   ;
+            color:white
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>File Uploading - CRUD</h1>
+    <hr>
+
+
+
+    <center>
+        <form action="/saveform" method="post" enctype="multipart/form-data">
+
+
+            <label for="">Enter Your Name</label>
+            <input type="text" name="username" id="">
+
+            <br><br>
+
+            <label for="">Upload File</label>
+            <input type="file" name="file" id="">
+
+            <br><br>
+
+            <button>Create Profile</button>
+
+
+        </form>
+
+    </center>
+
+</body>
+
+</html>

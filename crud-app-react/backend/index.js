@@ -45,11 +45,11 @@ app.post("/add_students", async (req, res) => {
 
 // Update student
 app.put("/students/:id", async (req, res) => {
-  const { name, email } = req.body
+  const { name, email, course } = req.body
   const { id } = req.params
   console.log(id)
   try {
-    const sql = `UPDATE students SET name = '${name}', email = '${email}' WHERE id = '${id}'`
+    const sql = `UPDATE students SET name = '${name}', email = '${email}', course='${course}' WHERE id = '${id}'`
     await connection.execute(sql)
     res.send({ message: "Student updated" })
   } catch (err) {

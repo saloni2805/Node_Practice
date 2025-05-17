@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application</title>
+    <%- include('../views/cdn.ejs')%>
+  </head>
+
+  <body>
+    <h1 class="text-center my-4">Job Application Form</h1>
+    <hr />
+    <div class="container">
+      <form
+        action="/saveform"
+        class="p-3 bg-white rounded w-50 mx-auto"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label class="form-label" for="full_name">Full Name</label>
+          <input
+            type="text"
+            name="full_name"
+            class="form-control"
+            id="full_name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" name="email" class="form-control" id="email" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="phone">Phone</label>
+          <input type="text" name="phone" class="form-control" id="phone" />
+        </div>
+        <div class="mb-3">
+          <label for="position" class="form-label">Position</label>
+          <select class="form-select" name="position" id="position" required>
+            <option value="None">Select</option>
+            <option value="ReactJS">ReactJS</option>
+            <option value="NodeJS">NodeJS</option>
+            <option value="Mongo">Mongo</option>
+            <option value="MySQL">MySQL</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="file">Upload Resume</label>
+          <input
+            type="file"
+            name="file"
+            class="form-control"
+            id="file"
+            accept="application/pdf"
+          />
+          <div
+            id="fileError"
+            class="text-danger mt-1"
+            style="font-size: 14px"
+          ></div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="btn btn-primary mt-3 px-3 w-25">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    const form = document.querySelector("form")
+    const fileInput = document.getElementById("file")
+    const fileError = document.getElementById("fileError")
+
+    form.addEventListener("submit", function (e) {
+      fileError.textContent = "" // reset error message
+
+      const file = fileInput.files[0]
+      if (!file) {
+        fileError.textContent = "Please upload your resume."
+        e.preventDefault()
+        return
+      }
+
+      if (file.type !== "application/pdf") {
+        fileError.textContent = "Only PDF files are allowed."
+        e.preventDefault()
+        return
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        fileError.textContent = "File size must be less than 2MB."
+        e.preventDefault()
+      }
+    })
+  </script>
+</html>

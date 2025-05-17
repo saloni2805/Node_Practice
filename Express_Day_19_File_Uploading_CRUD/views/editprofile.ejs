@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/updateprofile" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="profile_id" value="<%-data.profile_id%>" id="">
+
+        <label for="">Update Username</label>
+        <input type="text" name="username" value="<%-data.username%>" id="">
+
+
+        <br><br>
+        <label for="">Update Profile</label>
+        <input type="file" name="file" id="">
+        
+        <br><br>
+
+        <img src="/uploads/<%-data.file%>" alt="no user" height="200px">
+
+        <br>
+        <br>
+
+        <button>Update profile</button>
+    </form>
+</body>
+</html>

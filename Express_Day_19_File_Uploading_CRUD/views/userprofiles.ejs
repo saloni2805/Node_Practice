@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .profile {
+            height: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .card {
+            height: auto;
+            width: 25%;
+            border: solid black 3px;
+            border-radius: 10px;
+            margin: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h2> User Profile Dashboard</h2>
+    <hr>
+
+
+    <div class="profile">
+
+        <%data.map((val,index)=>{ %>
+
+            <div class="card">
+
+                <h3><%-val.username%></h3>
+                <h3><%-val.file%></h3>
+                <!-- <img src="/uploads/badge (1)@2x.png" alt="no user" /> -->
+                <img src="/uploads/<%-val.file%>" alt="no user" height="70px" />
+
+                <br>
+                <button onclick="return confirm('Are you Sure ? ')"><a href="/delete/<%-val.profile_id%>" style="text-decoration:none;">Delete</a></button>
+
+                <button><a href="/edit/<%-val.profile_id%>">Edit</a></button>
+                <br>
+
+            </div>
+
+            <% })%>
+
+
+
+    </div>
+
+
+</body>
+
+</html>

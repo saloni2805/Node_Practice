@@ -16,6 +16,7 @@ const UserForm = () => {
     try {
       const response = await axios.get(`http://localhost:5000/students/${id}`)
       const { name, email, course } = response.data[0]
+
       setData({
         name: name || "",
         email: email || "",
@@ -36,6 +37,7 @@ const UserForm = () => {
     e.preventDefault()
     try {
       if (id) {
+        console.log(data.course)
         await axios.put(`http://localhost:5000/students/${id}`, data)
         alert("Updated successfully!")
       } else {
