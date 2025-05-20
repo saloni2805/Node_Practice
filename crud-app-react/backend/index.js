@@ -5,7 +5,13 @@ const connection = require("./config/db")
 
 const app = express()
 app.use(express.json()) // Use express.json() to parse incoming JSON requests
-app.use(cors())
+
+const corsOptions = {
+  origin: "http://localhost:5173", // Only allow this origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+  credentials: true, // if you’re using cookies or sessions
+}
+app.use(cors(corsOptions))
 
 // Get all students
 app.get("/students", async (req, res) => {

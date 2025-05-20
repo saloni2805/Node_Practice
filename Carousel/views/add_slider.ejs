@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Slider</title>
+    <%- include('../views/cdn.ejs')%>
+  </head>
+  <body>
+    <h1 class="text-center fw-bold my-3">Carousel Form</h1>
+    <form action="/saveform" method="post" enctype="multipart/form-data">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-3 mt-2">
+            <label class="form-label">Enter Carousel Title</label>
+            <input type="text" name="slider_title" id="" class="form-control" />
+          </div>
+          <div class="col-md-12 my-3">
+            <label class="form-label">Enter Carousel Description</label>
+            <textarea
+              name="slider_desc"
+              id=""
+              class="form-control w-100"
+              style="height: 100px"
+            ></textarea>
+          </div>
+          <div class="col-md-12 my-3">
+            <label class="form-label" for="">Upload carousel image</label>
+            <input type="file" name="slider_img" class="form-control" />
+          </div>
+          <div class="col-md-12 my-3 text-center">
+            <button class="btn btn-success fw-bold px-4">
+              Upload carousel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

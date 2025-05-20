@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <h1>User Edit Page</h1>
+
+    <hr>
+
+
+    <form action="/edituser" method="post">
+
+        <input type="hidden" name="user_id" readonly value="<%-data.user_id%>" id=""><br><br>
+
+        <label for="">Update Email</label>
+        <input type="email" name="useremail" value="<%-data.useremail%>" id="useremail">
+
+        <br><br>
+
+
+        <label for="">Update Password</label>
+        <input type="text" name="userpass" value="<%-data.userpass%>" id="userpass">
+
+        <br><br>
+
+        <label for="">Update Mobile </label>
+        <input type="text" name="usermobile" value="<%-data.usermobile%>" id="usermobile">
+
+        <br><br>
+
+        <label for="">Update DOB</label>
+        <input type="date" name="userdob" value="<%-new Date(data.userdob).toLocaleDateString('en-CA')%>" id="userdob">
+
+        <br><br>
+
+
+        <button>Update User</button>
+    </form>
+
+</body>
+
+</html>

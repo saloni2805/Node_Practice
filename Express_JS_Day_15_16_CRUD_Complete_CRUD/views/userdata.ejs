@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+<body>
+
+
+    <h1> User Records</h1>
+
+    <hr>
+
+
+    <a href="/registration"><button>Add User</button></a>
+    <br><br>
+    <table border="1" cellspacing="0" cellpadding="10" style="width: 100%;">
+        <tr>
+            <th>Sr No</th>
+            <th>Id</th>
+            <th>User EMail</th>
+            <th>User Password</th>
+            <th>User Mobile</th>
+            <th>User DOB</th>
+            <td>Action</td>
+            <td>Action</td>
+
+        </tr>
+
+
+
+        <%data.map((val,index)=>{ %>
+
+            <tr>
+                <td><%-index+1%></td>
+                <td><%-val.user_id%></td>
+                <td><%-val.useremail%></td>
+                <td><%-val.userpass%></td>
+                <td><%-val.usermobile%></td>
+                <td><%-new Date(val.userdob).toISOString().slice(0,10)%></td>
+                <td><%-new Date(val.userdob).toLocaleDateString()%></td>
+
+                <td onclick="return confirm('Are You Sure ?')"><a href="/delete/<%-val.user_id%>"><i class="fa fa-trash"
+                            style="font-weight: bold;color:red"></i></a></td>
+
+
+                <!-- <td><a href="/delete?id=<%-val.user_id%>"><i class="fa fa-trash" style="font-weight: bold;color:red"></i></a></td> -->
+
+
+                <td><a href="/edit?id=<%-val.user_id%>"><i class="fa fa-edit" style="color:green;font-weight: bold;"></i></a></td>
+
+
+            </tr>
+
+
+            <% })%>
+
+
+
+                <%if(data.length==0){ %>
+
+                    <tr>
+                        <td colspan="7" style="text-align: center;">No Record Found</td>
+                    </tr>
+                    <%}%>
+
+
+
+    </table>
+
+
+
+</body>
+
+</html>
