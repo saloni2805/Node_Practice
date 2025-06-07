@@ -34,7 +34,7 @@ const Home = () => {
       <hr />
 
       <form action="" method="post" onSubmit={(e) => saveForm(e)}>
-        <label htmlFor="">ENter Your Name</label>
+        <label htmlFor="">Enter Your Name</label>
         <input
           type="text"
           name="username"
