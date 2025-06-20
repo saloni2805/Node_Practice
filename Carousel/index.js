@@ -22,7 +22,11 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/manage_sliders", async (req, res) => {
-  res.render("manage_sliders.ejs")
+  var sql = `select * from slider`
+  const result = await connection.execute(sql)
+  console.log(result[0][0])
+  const obj = { data: result[0][0] }
+  res.render("manage_sliders.ejs", obj)
 })
 
 app.get("/add_slider", async (req, res) => {
@@ -40,6 +44,10 @@ app.post("/saveform", upload.single("slider_img"), async (req, res) => {
     console.log("Error")
   }
 })
+
+// app.get("/view_slider", async (req, res) => {
+//   res.render("view_slider.ejs")
+// })
 
 app.listen(PORT, HOST, () => {
   console.log(`Server is up on http://${HOST}:${PORT}`)
