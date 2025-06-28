@@ -22,7 +22,7 @@
           > -->
         </div>
       </div>
-      <table>
+      <table class="table table-bordered fw-bold text-center">
         <thead>
           <tr>
             <th>Sr. No.</th>
@@ -33,7 +33,17 @@
           </tr>
         </thead>
         <tbody>
-          <%>
+          <% data.map((val,index)=>{%>
+          <tr>
+            <td><%-index+1 %></td>
+            <td><%-val.slider_id %></td>
+            <td><%-val.slider_title %></td>
+            <td><%-val.slider_desc %></td>
+            <td>
+              <img src="/uploads/<%-val.file%>" class="img-fluid" alt="" style='height:100px'/>
+            </td>
+          </tr>
+          <% })%>
         </tbody>
       </table>
     </div>

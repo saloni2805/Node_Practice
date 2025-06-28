@@ -25,7 +25,7 @@ app.get("/manage_sliders", async (req, res) => {
   var sql = `select * from slider`
   const result = await connection.execute(sql)
   console.log(result[0][0])
-  const obj = { data: result[0][0] }
+  const obj = { data: result[0] }
   res.render("manage_sliders.ejs", obj)
 })
 
