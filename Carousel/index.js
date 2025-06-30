@@ -7,6 +7,7 @@ const PORT = 5000 || process.env.PORT
 const HOST = "127.0.0.1"
 
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static("public/"))
 
 const storage = multer.diskStorage({
   destination: "public/uploads",
@@ -18,7 +19,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 app.get("/", async (req, res) => {
-  res.render("home.ejs")
+  try {
+    var sql = `select * from slider`
+    const result = await connection.execute(sql)
+    const obj = { data: result[0] }
+    res.render("home.ejs", obj)
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 app.get("/manage_sliders", async (req, res) => {
@@ -36,12 +44,23 @@ app.get("/add_slider", async (req, res) => {
 app.post("/saveform", upload.single("slider_img"), async (req, res) => {
   try {
     const { slider_title, slider_desc } = req.body
-    const file = req.file.filename
+    const file = req.file ? req.file.filename : null
     var sql = `insert into slider(slider_title, slider_desc, file) values ('${slider_title}','${slider_desc}','${file}')`
     await connection.execute(sql)
     res.redirect("/manage_sliders")
   } catch {
     console.log("Error")
+  }
+})
+
+app.get("/delete/:id", async (req, res) => {
+  try {
+    var id = req.params.id
+    var sql = `delete from slider where slider_id='${id}'`
+    await connection.execute(sql)
+    res.redirect("/manage_sliders")
+  } catch (e) {
+    console.log(e)
   }
 })
 

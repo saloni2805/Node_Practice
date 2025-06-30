@@ -25,6 +25,8 @@
       <table class="table table-bordered fw-bold text-center">
         <thead>
           <tr>
+            <th></th>
+            <th></th>
             <th>Sr. No.</th>
             <th>Slider Id</th>
             <th>Slider Id</th>
@@ -35,12 +37,28 @@
         <tbody>
           <% data.map((val,index)=>{%>
           <tr>
+            <td onclick="return confirm('Are you sure?')">
+              <a href="/delete/<%-val.slider_id%>"
+                ><button class="btn btn-sm btn-danger">Delete</button></a
+              >
+            </td>
+            <td onclick="">
+              <a href="/edit/<%-val.slider_id%>"
+                ><button class="btn btn-sm btn-success">Edit</button></a
+              >
+            </td>
+
             <td><%-index+1 %></td>
             <td><%-val.slider_id %></td>
             <td><%-val.slider_title %></td>
             <td><%-val.slider_desc %></td>
             <td>
-              <img src="/uploads/<%-val.file%>" class="img-fluid" alt="" style='height:100px'/>
+              <img
+                src="/uploads/<%-val.file%>"
+                class="img-fluid"
+                alt="Not Available"
+                style="height: 100px"
+              />
             </td>
           </tr>
           <% })%>
